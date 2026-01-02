@@ -17,8 +17,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from torchvision import transforms
 
-from preporcessing import get_preprocess_transforms
-from augmentation import get_augmentation_transforms
+from src.preporcessing import get_preprocess_transforms
+from src.augmentation import get_augmentation_transforms
 
 
 class HuggingFaceDataset(Dataset):

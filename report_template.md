@@ -193,14 +193,24 @@ Après rétropropagation sur ce batch, la norme globale des gradients est **2.79
 
 ## 3) Overfit « petit échantillon »
 
-- **Sous-ensemble train** : `N = ____` exemples
-- **Hyperparamètres modèle utilisés** (les 2 à régler) : `_____`, `_____`
-- **Optimisation** : LR = `_____`, weight decay = `_____` (0 ou très faible recommandé)
-- **Nombre d’époques** : `_____`
+- **Sous-ensemble train** : `N = 32` exemples
+- **Hyperparamètres modèle utilisés** (les 2 à régler) : `blocks_per_stage = [2, 2, 2]`, `dilations = [1, 2, 2]`
+- **Optimisation** : LR = `0.01`, weight decay = `0.0` (0 ou très faible recommandé)
+- **Nombre d'époques** : `50`
 
-> _Insérer capture TensorBoard : `train/loss` montrant la descente vers ~0._
+![Overfit train/loss](/artifacts/overfit_train-loss.png)
 
-**M3.** Donnez la **taille du sous-ensemble**, les **hyperparamètres** du modèle utilisés, et la **courbe train/loss** (capture). Expliquez ce qui prouve l’overfit.
+**M3.** Donnez la **taille du sous-ensemble**, les **hyperparamètres** du modèle utilisés, et la **courbe train/loss** (capture). Expliquez ce qui prouve l'overfit.
+
+Le sous-ensemble d'overfit contient **32 exemples** avec 30 classes uniques (distribution très diverse). Les hyperparamètres utilisés sont une architecture modérée avec **2 blocs par stage** et des **dilations [1, 2, 2]**.
+
+L'overfit est clairement démontré par :
+
+1. **Descente rapide de la loss** : de 5.25 (époque 1) à 0.007 (époque 50), soit une réduction de 99.9%
+2. **Accuracy atteignant 100%** : dès l'époque 11, le modèle atteint 100% de précision et la maintient quasiment constamment
+3. **Mémorisation complète** : avec seulement 32 échantillons, le modèle mémorise parfaitement l'ensemble d'entraînement, ce qui est la preuve attendue d'une capacité d'apprentissage fonctionnelle
+
+Cette expérience confirme que le modèle a la capacité d'apprendre et que l'implémentation est correcte, validant ainsi l'architecture avant l'entraînement sur le dataset complet.
 
 ---
 
