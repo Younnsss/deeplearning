@@ -146,32 +146,48 @@ Ces scores très faibles (0.5%) constituent un plancher minimal que tout modèle
 
 - **Description couche par couche** (ordre exact, tailles, activations, normalisations, poolings, résiduels, etc.) :
 
-  - Input → …
-  - Stage 1 (répéter N₁ fois) : …
-  - Stage 2 (répéter N₂ fois) : …
-  - Stage 3 (répéter N₃ fois) : …
-  - Tête (GAP / linéaire) → logits (dimension = nb classes)
+  - Input → (3, 64, 64)
+  - Stage 1 (répéter B₁ fois) : Conv2d(3×3, padding=1, dilation=1) → 64 canaux → BatchNorm2d → ReLU → MaxPool2d(2×2) → (64, 32, 32)
+  - Stage 2 (répéter B₂ fois) : Conv2d(3×3, padding=D₂, dilation=D₂) → 128 canaux → BatchNorm2d → ReLU → MaxPool2d(2×2) → (128, 16, 16)
+  - Stage 3 (répéter B₃ fois) : Conv2d(3×3, padding=D₃, dilation=D₃) → 256 canaux → BatchNorm2d → ReLU → AdaptiveAvgPool2d(1×1) → (256, 1, 1)
+  - Tête (GAP / linéaire) → Linear(256, 200) → logits (dimension = 200 classes)
 
 - **Loss function** :
 
   - Multi-classe : CrossEntropyLoss
-  - Multi-label : BCEWithLogitsLoss
-  - (autre, si votre tâche l’impose)
 
-- **Sortie du modèle** : forme = **(batch_size, num_classes)** (ou **(batch_size, num_attributes)**)
+- **Sortie du modèle** : forme = **(batch_size, 200)** (torch.Size([B, 200]))
 
-- **Nombre total de paramètres** : `_____`
+- **Nombre total de paramètres** : `1,198,600`
 
-**M1.** Décrivez l’**architecture** complète et donnez le **nombre total de paramètres**.  
+**M1.** Décrivez l'**architecture** complète et donnez le **nombre total de paramètres**.  
 Expliquez le rôle des **2 hyperparamètres spécifiques au modèle** (ceux imposés par votre sujet).
+
+L'architecture implémentée est un CNN à 3 stages avec convolutions dilatées. Chaque stage suit le pattern Conv2d(3×3) → BatchNorm2d → ReLU, répété plusieurs fois selon le paramètre de blocs. La réduction spatiale s'effectue par MaxPool2d(2×2) entre les stages 1-2 et 2-3, puis par Global Average Pooling avant la classification.
+
+Le modèle compte **1,198,600 paramètres entraînables** et produit des logits de forme (batch_size, 200) pour les 200 classes de Tiny ImageNet.
+
+**Les 2 hyperparamètres spécifiques au modèle** sont :
+
+1. **Nombre de blocs par stage (B₁, B₂, B₃)** : contrôle la profondeur de chaque stage, choix entre (2,2,2) ou (3,3,3). Plus de blocs augmentent la capacité d'apprentissage mais aussi le risque de surapprentissage et le coût computationnel.
+
+2. **Dilation par stage (D₂, D₃)** : contrôle le champ réceptif des convolutions dans les stages 2 et 3, choix entre (2,2) ou (2,3). Une dilation plus élevée permet de capturer des dépendances spatiales plus larges sans augmenter le nombre de paramètres, particulièrement utile après la réduction spatiale par MaxPool.
 
 ### 2.3 Perte initiale & premier batch
 
 - **Loss initiale attendue** (multi-classe) ≈ `-log(1/num_classes)` ; exemple 100 classes → ~4.61
-- **Observée sur un batch** : `_____`
+- **Observée sur un batch** : `5.2996`
 - **Vérification** : backward OK, gradients ≠ 0
 
 **M2.** Donnez la **loss initiale** observée et dites si elle est cohérente. Indiquez la forme du batch et la forme de sortie du modèle.
+
+Nous avons chargé un batch d'entraînement de taille 32. Les entrées ont la forme **(32, 3, 64, 64)** et les cibles la forme **(32,)** (labels entiers). La sortie du modèle est un tenseur de logits de forme **(32, 200)**.
+
+La loss initiale (CrossEntropyLoss) vaut **5.2996**, ce qui est parfaitement cohérent avec l'intuition d'une prédiction quasi-uniforme au départ, proche de **-log(1/200) = 5.2983** (différence négligeable de 0.0013).
+
+Les logits initiaux ont une moyenne de **-0.0007** (≈ 0) et un écart-type de **0.2625**, confirmant une initialisation correcte des poids sans biais vers une classe particulière.
+
+Après rétropropagation sur ce batch, la norme globale des gradients est **2.79**, strictement non nulle, confirmant que le gradient se propage correctement à travers toutes les couches du modèle.
 
 ---
 
