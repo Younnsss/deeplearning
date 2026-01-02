@@ -14,7 +14,7 @@
 - **Étudiant·e** : \_Boutkrida, Younes
 - **Projet** : Tiny ImageNet (Convolution)
 - **Dépôt Git** : https://github.com/Younnsss/deeplearning
-- **Environnement** : `python == ...`, `torch == ...`, `cuda == ...`
+- **Environnement** : `python == 3.10.18`, `torch == 2.5.1`, `cuda == 12.1`
 - **Commandes utilisées** :
   - Entraînement : `python -m src.train --config configs/config.yaml`
   - LR finder : `python -m src.lr_finder --config configs/config.yaml`
@@ -27,7 +27,7 @@
 
 ### 1.1 Description du dataset
 
-- **Source** (lien) :
+- **Source** (lien) : https://huggingface.co/datasets/zh-plus/tiny-imagenet
 - **Type d’entrée** (image) : image 3 x 64 x 64
 - **Tâche** : multiclasses
 - **Dimensions d’entrée attendues** (`meta["input_shape"]`) : 3 x 64 x 64
@@ -41,23 +41,23 @@
 
 | Split | #Exemples | Particularités (déséquilibre, longueur moyenne, etc.) |
 | ----: | --------: | ----------------------------------------------------- |
-| Train |           |                                                       |
-|   Val |           |                                                       |
-|  Test |           |                                                       |
+| Train |    90 000 | 200 classes équilibrées (450 images/classe)           |
+|   Val |    10 000 | 200 classes équilibrées (50 images/classe)            |
+|  Test |    10 000 | 200 classes équilibrées (50 images/classe)            |
 
 **D2.** Donnez la taille de chaque split et le nombre de classes.
 
-> Le split train contient environ 90% des exemples du train original (90% de 100000 -> 90000), le split test 10% stratifié (10% de 100000 -> 10000), et le split validation correspond au split `valid` du dataset HuggingFace (10000). Le nombre de classes est 200.
+> Le split train contient 90 000 exemples (450 images par classe), le split validation contient 10 000 exemples (50 images par classe), et le split test contient 10 000 exemples (50 images par classe). Le nombre de classes est 200.
 
 **D3.** Si vous avez créé un split (ex. validation), expliquez **comment** (stratification, ratio, seed).
 
 > Le split test a été créé à partir du train original par une séparation stratifiée (ratio 0.1), en utilisant la seed fixe 42 pour garantir la reproductibilité. La stratification assure une distribution équilibrée des classes dans chaque split.
 
-**D4.** Donnez la **distribution des classes** (graphique ou tableau) et commentez en 2–3 lignes l’impact potentiel sur l’entraînement.
+**D4.** Donnez la **distribution des classes** (graphique ou tableau) et commentez en 2–3 lignes l'impact potentiel sur l'entraînement.
 
-![Distribution des classes](/img/distributionsClasses.png)
+![Distribution des classes](/artifacts/distributionsClasses.png)
 
-> La distribution des classes est parfaitement équilibrée : chaque classe contient exactement 50 images. Cela garantit que le modèle ne sera pas biaisé vers une classe majoritaire et que les métriques d’entraînement et de validation reflèteront fidèment la performance réelle. L’absence de déséquilibre facilite l’apprentissage et la comparaison des résultats entre classes.
+> La distribution des classes est parfaitement équilibrée : chaque classe contient exactement 450 images en entraînement, 50 en validation et 50 en test. Cela garantit que le modèle ne sera pas biaisé vers une classe majoritaire et que les métriques d'entraînement et de validation reflèteront fidèlement la performance réelle. L'absence de déséquilibre facilite l'apprentissage et la comparaison des résultats entre classes.
 
 **D5.** Mentionnez toute particularité détectée (tailles variées, longueurs variables, multi-labels, etc.).
 
@@ -67,10 +67,7 @@
 
 Listez précisément les opérations et paramètres (valeurs **fixes**) :
 
-- Vision : resize = **, center-crop = **, normalize = (mean=**, std=**)…
-- Audio : resample = ** Hz, mel-spectrogram (n_mels=**, n_fft=**, hop_length=**), AmplitudeToDB…
-- NLP : tokenizer = **, vocab = **, max_length = **, padding/truncation = **…
-- Séries : normalisation par canal, fenêtrage = \_\_…
+- Vision : resize = (64, 64), center-crop = 64, normalize = (mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 
 **D6.** Quels **prétraitements** avez-vous appliqués (opérations + **paramètres exacts**) et **pourquoi** ?
 
@@ -118,12 +115,19 @@ Oui, toutes les augmentations appliquées sont label-preserving :
 
 ### 1.5 Sanity-checks
 
-- **Exemples** après preprocessing/augmentation (insérer 2–3 images/spectrogrammes) :
+- Après preprocessing/augmentation :
 
-> _Insérer ici 2–3 captures illustrant les données après transformation._
+![Distribution des classes](/artifacts/class_info.png)
 
-**D10.** Montrez 2–3 exemples et commentez brièvement.  
-**D11.** Donnez la **forme exacte** d’un batch train (ex. `(batch, C, H, W)` ou `(batch, seq_len)`), et vérifiez la cohérence avec `meta["input_shape"]`.
+![Distribution des classes](/artifacts/class_distribution.png)
+
+**D10.** Montrez 2–3 exemples et commentez brièvement.
+
+Les résultats montrent des images 64x64 pixels correctement normalisées avec des valeurs dans la plage [-2.118, 2.640], ce qui correspond aux transformations appliquées (normalisation ImageNet). Les batch shapes sont cohérentes : `torch.Size([32, 3, 64, 64])` avec dtype `torch.float32`. La distribution des classes est parfaitement équilibrée : 450 échantillons par classe en train, 50 en validation et 50 en test, confirmant la stratification réussie lors du split des données.
+
+**D11.** Donnez la **forme exacte** d'un batch train (ex. `(batch, C, H, W)` ou `(batch, seq_len)`), et vérifiez la cohérence avec `meta["input_shape"]`.
+
+La forme exacte d'un batch est `torch.Size([32, 3, 64, 64])` avec un dtype `torch.float32`, ce qui correspond parfaitement au format attendu `(batch_size, channels, height, width)`. Cette forme est cohérente avec `meta["input_shape"] = (3, 64, 64)` : 3 canaux RGB pour des images 64x64 pixels. Les trois splits (train/val/test) ont tous la même forme de batch, garantissant la cohérence du preprocessing.
 
 ---
 
@@ -133,9 +137,10 @@ Oui, toutes les augmentations appliquées sont label-preserving :
 
 **M0.**
 
-- **Classe majoritaire** — Métrique : `_____` → score = `_____`
-- **Prédiction aléatoire uniforme** — Métrique : `_____` → score = `_____`  
-  _Commentez en 2 lignes ce que ces chiffres impliquent._
+- **Classe majoritaire** — Métrique : `Accuracy` → score = `~0.5%`
+- **Prédiction aléatoire uniforme** — Métrique : `Accuracy` → score = `0.5%`
+
+Ces scores très faibles (0.5%) constituent un plancher minimal que tout modèle fonctionnel doit rapidement dépasser. Le dataset Tiny ImageNet étant quasi équilibré (exactement 550 exemples pour les 200 classes), les deux baselines donnent des performances similaires, confirmant l'absence de biais de distribution et la nécessité d'apprendre des caractéristiques visuelles.
 
 ### 2.2 Architecture implémentée
 

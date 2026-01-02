@@ -12,16 +12,29 @@ dataset:
 
 preprocess:
   # transformations de base (ex: resize, normalize)
-  resize: # ex: [32, 32] ou null
-  normalize: # ex: {"mean": [0.5,0.5,0.5], "std":[0.5,0.5,0.5]} ou null
-  text_tokenizer: # pour NLP : nom ou paramètres, sinon null
+  img_size: 64
+  resize: [64, 64] # taille de redimensionnement
+  normalize:
+    mean: [0.485, 0.456, 0.406] # Valeurs ImageNet
+    std: [0.229, 0.224, 0.225]
 
 augment:
-  # data augmentation (laisser null si non utilisée)
-  random_flip: # true/false
-  random_crop: # paramètres ou null
-  color_jitter: # paramètres ou null
-  spec_augment: # pour audio : paramètres ou null
+  # data augmentation pour l'entraînement
+  random_horizontal_flip:
+    p: 0.5
+  random_rotation:
+    degrees: 15
+  random_resized_crop:
+    scale: [0.8, 1.0]
+    ratio: [0.9, 1.1]
+  color_jitter:
+    brightness: 0.1
+    contrast: 0.1
+    saturation: 0.1
+    hue: 0.05
+  random_erasing:
+    enabled: false # optionnel, pas utilisé actuellement
+    p: 0.2
 
 model:
   type: TODO # ex: "resnet18", "mlp", "lstm", ...

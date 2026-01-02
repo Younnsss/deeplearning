@@ -6,3 +6,7 @@ tensorboard
 pyyaml
 tqdm
 numpy
+matplotlib
+scikit-learn
+datasets
+pillow
