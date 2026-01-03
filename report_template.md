@@ -55,7 +55,7 @@
 
 **D4.** Donnez la **distribution des classes** (graphique ou tableau) et commentez en 2–3 lignes l'impact potentiel sur l'entraînement.
 
-![Distribution des classes](/artifacts/data/distributionsClasses.png)
+![Distribution des classes](/artifacts/dataset/distributionsClasses.png)
 
 > La distribution des classes est parfaitement équilibrée : chaque classe contient exactement 450 images en entraînement, 50 en validation et 50 en test. Cela garantit que le modèle ne sera pas biaisé vers une classe majoritaire et que les métriques d'entraînement et de validation reflèteront fidèment la performance réelle. L'absence de déséquilibre facilite l'apprentissage et la comparaison des résultats entre classes.
 
@@ -117,9 +117,9 @@ Listez précisément les opérations et paramètres (valeurs **fixes**) :
 
 > Après preprocessing/augmentation :
 
-![Distribution des classes](/artifacts/data/class_info.png)
+![Distribution des classes](/artifacts/dataset/class_info.png)
 
-![Distribution des classes](/artifacts/data/class_distribution.png)
+![Distribution des classes](/artifacts/dataset/class_distribution.png)
 
 **D10.** Montrez 2–3 exemples et commentez brièvement.
 
