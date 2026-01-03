@@ -346,18 +346,34 @@ L'architecture [2,2,2] + [1,2,2] (moins de paramètres) converge plus rapidement
 
 - **Checkpoint évalué** : `artifacts/best.ckpt`
 - **Métriques test** :
-  - Metric principale (nom = `_____`) : `_____`
-  - Metric(s) secondaire(s) : `_____`
+  - Metric principale (nom = `accuracy`) : `46.00%`
+  - Metric(s) secondaire(s) : `F1 Macro = 0.4544`, `Test Loss = 2.2396`
 
 **M9.** Donnez les **résultats test** et comparez-les à la validation (écart raisonnable ? surapprentissage probable ?).
+
+> Les résultats test montrent une **excellente cohérence avec la validation** : accuracy test (46.00%) vs validation finale (46.20%), soit un écart négligeable de seulement 0.20 point. La test loss (2.2396) est également très proche de la validation loss finale (≈2.26), confirmant une généralisation saine du modèle.
+>
+> Le F1 Macro (0.4544) proche de l'accuracy (0.4600) indique une performance équilibrée entre les 200 classes, sans biais majeur vers certaines classes. L'absence d'écart significatif entre validation et test exclut un surapprentissage et valide la robustesse des hyperparamètres choisis via grid search.
 
 ---
 
 ## 10) Limites, erreurs & bug diary (court)
 
 - **Limites connues** (données, compute, modèle) :
-- **Erreurs rencontrées** (shape mismatch, divergence, NaN…) et **solutions** :
-- **Idées « si plus de temps/compute »** (une phrase) :
+
+> Le modèle présente un sous-apprentissage marqué, principalement dû à plusieurs facteurs :
+
+- **Compute** : Ressources limitées, entraînement restreint à 20 époques, ce qui empêche d’explorer des architectures plus profondes ou des entraînements prolongés.
+- **Modèle** : Architecture CNN standard, sans mécanismes récents (attention, skip connections), plafonnant à environ 46 % d’accuracy sur 200 classes.
+
+- **Erreurs rencontrées** (shape mismatch, divergence, NaN…) et **solutions** :
+
+> - **Shape mismatch** lors du chargement des données : incompatibilité entre images RGB (64, 64, 3) et niveaux de gris (64, 64). Solution : conversion systématique en RGB au prétraitement.
+> - **Instabilité lors du grid search** : divergence de certaines configurations avec des LR trop élevés. Solution : limitation du LR à 1e-3 maximum et suivi attentif des métriques.
+
+- **Axes d’amélioration si plus de temps/compute** (en une phrase) :
+
+> Prolonger l’entraînement (50+ époques) avec scheduler, tester des architectures modernes (ResNet, attention), augmenter l’intensité des augmentations de données, et recourir à l’ensemblage de modèles pour dépasser 50 % d’accuracy.
 
 ---
 
@@ -472,9 +488,9 @@ python -m src.lr_finder --config configs/config.yaml
 
 - **Artifacts requis présents** :
 
-  - [ ] `runs/` (runs utiles uniquement)
-  - [ ] `artifacts/best.ckpt`
-  - [ ] `configs/config.yaml` aligné avec la meilleure config
+  - [x] `runs/` (runs utiles uniquement)
+  - [x] `artifacts/best.ckpt`
+  - [x] `configs/config.yaml` aligné avec la meilleure config
 
 ---
 
