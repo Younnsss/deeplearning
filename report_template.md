@@ -285,20 +285,29 @@ La **meilleure combinaison** est : LR=3e-04, Weight Decay=1e-5, Blocks=[3,3,3], 
 ## 6) Entraînement complet (10–20 époques, sans scheduler)
 
 - **Configuration finale** :
-  - LR = `_____`
-  - Weight decay = `_____`
-  - Hyperparamètre modèle A = `_____`
-  - Hyperparamètre modèle B = `_____`
-  - Batch size = `_____`
-  - Époques = `_____` (10–20)
+  - LR = `3e-4`
+  - Weight decay = `1e-5`
+  - Hyperparamètre modèle A = `[3,3,3]` (blocks_per_stage)
+  - Hyperparamètre modèle B = `[2,3]` (dilations)
+  - Batch size = `32` (inféré du grid search)
+  - Époques = `15`
 - **Checkpoint** : `artifacts/best.ckpt` (selon meilleure métrique val)
 
-> _Insérer captures TensorBoard :_
->
-> - `train/loss`, `val/loss`
-> - `val/accuracy` **ou** `val/f1` (classification)
+| ![img1](/artifacts/training/train-loss.png) | ![img2](/artifacts/training/train-accuracy.png) |
+| :-----------------------------------------: | :---------------------------------------------: |
+|  ![img3](/artifacts/training/val-loss.png)  |  ![img4](/artifacts/training/val-accuracy.png)  |
 
-**M6.** Montrez les **courbes train/val** (loss + métrique). Interprétez : sous-apprentissage / sur-apprentissage / stabilité d’entraînement.
+**M6.** Montrez les **courbes train/val** (loss + métrique). Interprétez : sous-apprentissage / sur-apprentissage / stabilité d'entraînement.
+
+L'entraînement montre une **convergence stable et saine** sur 15 époques :
+
+- Train loss : descente continue de 4.54 → 2.02
+- Val loss : amélioration de 4.01 → 2.26
+- Train accuracy : progression régulière de 6.52% → 49.76%
+- Val accuracy : amélioration de 11.76% → 46.20%
+
+L’écart entre les performances train et validation reste limité, ce qui exclut un surapprentissage marqué.
+En revanche, les performances restent relativement modestes (≈ 50 % d’accuracy train et ≈ 46 % en validation sur 200 classes), ce qui suggère un sous-apprentissage : le modèle n’a pas encore pleinement capturé la complexité du jeu de données.
 
 ---
 

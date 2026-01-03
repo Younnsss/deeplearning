@@ -1,0 +1,184 @@
+Host: arcadia-slurm-node-2
+Date: Sat Jan  3 01:29:03 AM UTC 2026
+CUDA visible devices: MIG-f2f35eff-b07f-5887-8dc6-e4889954a9b4
+🌱 Seed initialisé: 42
+Starting grid search with 24 combinations...
+
+Run 1/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 1e-05, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.4994, Train Acc: 7.74%, Val Loss: 3.9966, Val Acc: 13.29%
+Epoch 2/3: Train Loss: 3.8431, Train Acc: 15.78%, Val Loss: 3.6201, Val Acc: 18.31%
+Epoch 3/3: Train Loss: 3.4968, Train Acc: 21.38%, Val Loss: 3.2570, Val Acc: 24.65%
+Run completed. Final metrics: {'train_loss': 3.4968338082195216, 'train_accuracy': 21.38222222222222, 'val_loss': 3.257033337228976, 'val_accuracy': 24.65}
+
+Run 2/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 1e-05, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.4573, Train Acc: 8.12%, Val Loss: 4.1302, Val Acc: 11.32%
+Epoch 2/3: Train Loss: 3.7633, Train Acc: 17.20%, Val Loss: 3.6838, Val Acc: 18.22%
+Epoch 3/3: Train Loss: 3.4073, Train Acc: 23.05%, Val Loss: 3.4028, Val Acc: 22.71%
+Run completed. Final metrics: {'train_loss': 3.4073308051543605, 'train_accuracy': 23.047777777777778, 'val_loss': 3.402847405820609, 'val_accuracy': 22.71}
+
+Run 3/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 1e-05, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.5480, Train Acc: 6.72%, Val Loss: 4.1633, Val Acc: 10.04%
+Epoch 2/3: Train Loss: 3.9005, Train Acc: 14.34%, Val Loss: 3.8913, Val Acc: 15.11%
+Epoch 3/3: Train Loss: 3.5342, Train Acc: 19.84%, Val Loss: 3.4906, Val Acc: 20.46%
+Run completed. Final metrics: {'train_loss': 3.534170028962489, 'train_accuracy': 19.842222222222222, 'val_loss': 3.4906278235462906, 'val_accuracy': 20.46}
+
+Run 4/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 1e-05, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.5079, Train Acc: 7.10%, Val Loss: 4.1269, Val Acc: 10.20%
+Epoch 2/3: Train Loss: 3.8030, Train Acc: 15.84%, Val Loss: 3.7213, Val Acc: 16.94%
+Epoch 3/3: Train Loss: 3.4275, Train Acc: 21.86%, Val Loss: 3.1973, Val Acc: 25.31%
+Run completed. Final metrics: {'train_loss': 3.427500888625795, 'train_accuracy': 21.863333333333333, 'val_loss': 3.1972540712204225, 'val_accuracy': 25.31}
+
+Run 5/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 0.0001, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.5147, Train Acc: 7.50%, Val Loss: 4.0013, Val Acc: 12.57%
+Epoch 2/3: Train Loss: 3.8668, Train Acc: 15.57%, Val Loss: 3.8962, Val Acc: 15.02%
+Epoch 3/3: Train Loss: 3.5191, Train Acc: 21.00%, Val Loss: 3.4851, Val Acc: 21.71%
+Run completed. Final metrics: {'train_loss': 3.5190643850611996, 'train_accuracy': 20.997777777777777, 'val_loss': 3.4851405024528503, 'val_accuracy': 21.71}
+
+Run 6/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 0.0001, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.4662, Train Acc: 8.08%, Val Loss: 3.9182, Val Acc: 13.46%
+Epoch 2/3: Train Loss: 3.7772, Train Acc: 17.05%, Val Loss: 3.6026, Val Acc: 18.65%
+Epoch 3/3: Train Loss: 3.4323, Train Acc: 22.54%, Val Loss: 3.3347, Val Acc: 23.86%
+Run completed. Final metrics: {'train_loss': 3.432286638065966, 'train_accuracy': 22.54111111111111, 'val_loss': 3.3346968230348044, 'val_accuracy': 23.86}
+
+Run 7/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 0.0001, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.5311, Train Acc: 6.57%, Val Loss: 4.2926, Val Acc: 8.33%
+Epoch 2/3: Train Loss: 3.8675, Train Acc: 14.72%, Val Loss: 3.7990, Val Acc: 14.41%
+Epoch 3/3: Train Loss: 3.5056, Train Acc: 20.44%, Val Loss: 3.3570, Val Acc: 22.11%
+Run completed. Final metrics: {'train_loss': 3.5055786706440992, 'train_accuracy': 20.436666666666667, 'val_loss': 3.356970617565484, 'val_accuracy': 22.11}
+
+Run 8/24
+Hyperparameters: {'lr': 0.00025, 'weight_decay': 0.0001, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.5303, Train Acc: 6.88%, Val Loss: 4.1392, Val Acc: 11.40%
+Epoch 2/3: Train Loss: 3.8018, Train Acc: 15.96%, Val Loss: 3.6331, Val Acc: 18.42%
+Epoch 3/3: Train Loss: 3.4370, Train Acc: 22.02%, Val Loss: 3.3774, Val Acc: 22.95%
+Run completed. Final metrics: {'train_loss': 3.437021637149354, 'train_accuracy': 22.02, 'val_loss': 3.3774333388660662, 'val_accuracy': 22.95}
+
+Run 9/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 1e-05, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.4682, Train Acc: 7.50%, Val Loss: 4.4847, Val Acc: 8.94%
+Epoch 2/3: Train Loss: 3.8145, Train Acc: 16.04%, Val Loss: 3.7659, Val Acc: 16.56%
+Epoch 3/3: Train Loss: 3.4544, Train Acc: 21.82%, Val Loss: 3.2936, Val Acc: 24.40%
+Run completed. Final metrics: {'train_loss': 3.454422847088062, 'train_accuracy': 21.815555555555555, 'val_loss': 3.2935515002320748, 'val_accuracy': 24.4}
+
+Run 10/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 1e-05, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.4435, Train Acc: 7.92%, Val Loss: 3.9032, Val Acc: 13.79%
+Epoch 2/3: Train Loss: 3.7342, Train Acc: 17.25%, Val Loss: 3.8119, Val Acc: 17.21%
+Epoch 3/3: Train Loss: 3.3965, Train Acc: 22.85%, Val Loss: 3.4054, Val Acc: 22.52%
+Run completed. Final metrics: {'train_loss': 3.3965349229594968, 'train_accuracy': 22.84888888888889, 'val_loss': 3.4054369427525577, 'val_accuracy': 22.52}
+
+Run 11/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 1e-05, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.6120, Train Acc: 5.56%, Val Loss: 4.1503, Val Acc: 9.52%
+Epoch 2/3: Train Loss: 3.9911, Train Acc: 12.83%, Val Loss: 4.1635, Val Acc: 12.45%
+Epoch 3/3: Train Loss: 3.6094, Train Acc: 18.79%, Val Loss: 3.4137, Val Acc: 21.25%
+Run completed. Final metrics: {'train_loss': 3.609380980805913, 'train_accuracy': 18.785555555555554, 'val_loss': 3.4136881934949, 'val_accuracy': 21.25}
+
+Run 12/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 1e-05, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.6024, Train Acc: 5.75%, Val Loss: 4.1953, Val Acc: 9.09%
+Epoch 2/3: Train Loss: 3.9433, Train Acc: 13.39%, Val Loss: 3.7145, Val Acc: 16.79%
+Epoch 3/3: Train Loss: 3.5643, Train Acc: 19.30%, Val Loss: 3.4691, Val Acc: 21.01%
+Run completed. Final metrics: {'train_loss': 3.5643205053646114, 'train_accuracy': 19.302222222222223, 'val_loss': 3.4690671031848312, 'val_accuracy': 21.01}
+
+Run 13/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 0.0001, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.4741, Train Acc: 7.45%, Val Loss: 4.0925, Val Acc: 11.26%
+Epoch 2/3: Train Loss: 3.8188, Train Acc: 15.86%, Val Loss: 3.8588, Val Acc: 15.08%
+Epoch 3/3: Train Loss: 3.4571, Train Acc: 21.95%, Val Loss: 3.4419, Val Acc: 22.45%
+Run completed. Final metrics: {'train_loss': 3.4570894951588143, 'train_accuracy': 21.954444444444444, 'val_loss': 3.44192649581181, 'val_accuracy': 22.45}
+
+Run 14/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 0.0001, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.4760, Train Acc: 7.43%, Val Loss: 4.1138, Val Acc: 10.51%
+Epoch 2/3: Train Loss: 3.7624, Train Acc: 16.67%, Val Loss: 3.8030, Val Acc: 17.34%
+Epoch 3/3: Train Loss: 3.4156, Train Acc: 22.63%, Val Loss: 3.5193, Val Acc: 21.44%
+Run completed. Final metrics: {'train_loss': 3.4156035983685364, 'train_accuracy': 22.63, 'val_loss': 3.519267363289294, 'val_accuracy': 21.44}
+
+Run 15/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 0.0001, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.6359, Train Acc: 5.48%, Val Loss: 4.2598, Val Acc: 8.80%
+Epoch 2/3: Train Loss: 4.0102, Train Acc: 12.30%, Val Loss: 4.2009, Val Acc: 11.25%
+Epoch 3/3: Train Loss: 3.6436, Train Acc: 18.19%, Val Loss: 3.7142, Val Acc: 17.67%
+Run completed. Final metrics: {'train_loss': 3.6435646761620633, 'train_accuracy': 18.191111111111113, 'val_loss': 3.7141995805140122, 'val_accuracy': 17.67}
+
+Run 16/24
+Hyperparameters: {'lr': 0.0005, 'weight_decay': 0.0001, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.5916, Train Acc: 5.82%, Val Loss: 4.1470, Val Acc: 10.21%
+Epoch 2/3: Train Loss: 3.9175, Train Acc: 13.85%, Val Loss: 3.8262, Val Acc: 14.67%
+Epoch 3/3: Train Loss: 3.5341, Train Acc: 19.92%, Val Loss: 3.3803, Val Acc: 22.61%
+Run completed. Final metrics: {'train_loss': 3.5340837530508358, 'train_accuracy': 19.92222222222222, 'val_loss': 3.3803076713610762, 'val_accuracy': 22.61}
+
+Run 17/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 1e-05, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.5613, Train Acc: 6.41%, Val Loss: 4.1281, Val Acc: 10.95%
+Epoch 2/3: Train Loss: 3.8633, Train Acc: 15.29%, Val Loss: 3.7846, Val Acc: 17.25%
+Epoch 3/3: Train Loss: 3.4711, Train Acc: 21.51%, Val Loss: 3.4212, Val Acc: 22.73%
+Run completed. Final metrics: {'train_loss': 3.4710965111634504, 'train_accuracy': 21.506666666666668, 'val_loss': 3.4212027953836484, 'val_accuracy': 22.73}
+
+Run 18/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 1e-05, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.5400, Train Acc: 6.86%, Val Loss: 4.1360, Val Acc: 11.60%
+Epoch 2/3: Train Loss: 3.7777, Train Acc: 16.51%, Val Loss: 3.5959, Val Acc: 19.44%
+Epoch 3/3: Train Loss: 3.4022, Train Acc: 22.81%, Val Loss: 3.3085, Val Acc: 24.20%
+Run completed. Final metrics: {'train_loss': 3.4021628762410283, 'train_accuracy': 22.814444444444444, 'val_loss': 3.3084655268885457, 'val_accuracy': 24.2}
+
+Run 19/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 1e-05, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.7667, Train Acc: 4.24%, Val Loss: 4.3226, Val Acc: 8.40%
+Epoch 2/3: Train Loss: 4.1165, Train Acc: 10.94%, Val Loss: 3.8792, Val Acc: 14.60%
+Epoch 3/3: Train Loss: 3.7079, Train Acc: 17.31%, Val Loss: 3.5286, Val Acc: 20.37%
+Run completed. Final metrics: {'train_loss': 3.7078534944007457, 'train_accuracy': 17.307777777777776, 'val_loss': 3.5285691228537512, 'val_accuracy': 20.37}
+
+Run 20/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 1e-05, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.7611, Train Acc: 4.29%, Val Loss: 4.3448, Val Acc: 8.13%
+Epoch 2/3: Train Loss: 4.0828, Train Acc: 11.94%, Val Loss: 3.8161, Val Acc: 14.95%
+Epoch 3/3: Train Loss: 3.6503, Train Acc: 18.18%, Val Loss: 3.4311, Val Acc: 21.58%
+Run completed. Final metrics: {'train_loss': 3.6503216135429817, 'train_accuracy': 18.184444444444445, 'val_loss': 3.4311193905699366, 'val_accuracy': 21.58}
+
+Run 21/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 0.0001, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.5576, Train Acc: 6.50%, Val Loss: 4.1827, Val Acc: 11.06%
+Epoch 2/3: Train Loss: 3.8674, Train Acc: 14.98%, Val Loss: 3.6507, Val Acc: 18.00%
+Epoch 3/3: Train Loss: 3.4836, Train Acc: 21.45%, Val Loss: 3.4056, Val Acc: 22.83%
+Run completed. Final metrics: {'train_loss': 3.483566653037724, 'train_accuracy': 21.448888888888888, 'val_loss': 3.405583338806043, 'val_accuracy': 22.83}
+
+Run 22/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 0.0001, 'blocks_per_stage': [2, 2, 2], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.5329, Train Acc: 6.69%, Val Loss: 4.4768, Val Acc: 7.84%
+Epoch 2/3: Train Loss: 3.8120, Train Acc: 15.90%, Val Loss: 3.8084, Val Acc: 16.18%
+Epoch 3/3: Train Loss: 3.4583, Train Acc: 21.53%, Val Loss: 3.2883, Val Acc: 25.08%
+Run completed. Final metrics: {'train_loss': 3.4583112274757113, 'train_accuracy': 21.53, 'val_loss': 3.288311260576827, 'val_accuracy': 25.08}
+
+Run 23/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 0.0001, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 2]}
+Epoch 1/3: Train Loss: 4.7717, Train Acc: 4.05%, Val Loss: 4.4568, Val Acc: 6.84%
+Epoch 2/3: Train Loss: 4.1685, Train Acc: 10.57%, Val Loss: 4.1113, Val Acc: 11.67%
+Epoch 3/3: Train Loss: 3.7404, Train Acc: 16.58%, Val Loss: 3.4913, Val Acc: 20.55%
+Run completed. Final metrics: {'train_loss': 3.7404177216842767, 'train_accuracy': 16.57888888888889, 'val_loss': 3.491282709490377, 'val_accuracy': 20.55}
+
+Run 24/24
+Hyperparameters: {'lr': 0.001, 'weight_decay': 0.0001, 'blocks_per_stage': [3, 3, 3], 'dilations': [1, 2, 3]}
+Epoch 1/3: Train Loss: 4.7846, Train Acc: 4.21%, Val Loss: 4.3496, Val Acc: 7.94%
+Epoch 2/3: Train Loss: 4.1512, Train Acc: 10.81%, Val Loss: 4.1020, Val Acc: 12.23%
+Epoch 3/3: Train Loss: 3.7138, Train Acc: 17.19%, Val Loss: 3.5926, Val Acc: 19.57%
+Run completed. Final metrics: {'train_loss': 3.7137833120472865, 'train_accuracy': 17.191111111111113, 'val_loss': 3.5925938725090636, 'val_accuracy': 19.57}
+
+
+Grid Search Summary:
+Total runs: 24
+
+Top 5 configurations by validation accuracy:
+1. proj11_lr=3e-04_wd=1e-05_blocks=3-3-3_dil=2-3: val_acc=25.3100
+2. proj11_lr=1e-03_wd=1e-04_blocks=2-2-2_dil=2-3: val_acc=25.0800
+3. proj11_lr=3e-04_wd=1e-05_blocks=2-2-2_dil=2-2: val_acc=24.6500
+4. proj11_lr=5e-04_wd=1e-05_blocks=2-2-2_dil=2-2: val_acc=24.4000
+5. proj11_lr=1e-03_wd=1e-05_blocks=2-2-2_dil=2-3: val_acc=24.2000
