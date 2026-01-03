@@ -87,31 +87,31 @@ Listez précisément les opérations et paramètres (valeurs **fixes**) :
 ### 1.4 Augmentation de données — _train uniquement_
 
 > Liste des **augmentations** (opérations + **paramètres** et **probabilités**) :
-
-- Recadrage aléatoire puis redimensionnement (`RandomResizedCrop`, scale=(0.8, 1.0), ratio=(0.9, 1.1))
-- Flip horizontal aléatoire (`RandomHorizontalFlip`, p=0.5)
-- Rotation aléatoire (`RandomRotation`, degrés=15)
-- ColorJitter léger (`ColorJitter`, brightness=0.1, contrast=0.1, saturation=0.1, hue=0.05)
+>
+> - Recadrage aléatoire puis redimensionnement (`RandomResizedCrop`, scale=(0.8, 1.0), ratio=(0.9, 1.1))
+> - Flip horizontal aléatoire (`RandomHorizontalFlip`, p=0.5)
+> - Rotation aléatoire (`RandomRotation`, degrés=15)
+> - ColorJitter léger (`ColorJitter`, brightness=0.1, contrast=0.1, saturation=0.1, hue=0.05)
 
 **D8.** Quelles **augmentations** avez-vous appliquées (paramètres précis) et **pourquoi** ?
 
 > Les augmentations appliquées en entraînement sont :
-
-- **RandomResizedCrop** (scale=(0.8, 1.0), ratio=(0.9, 1.1)) : simule des variations de cadrage et de zoom, rendant le modèle robuste à la position et à la taille de l’objet.
-- **RandomHorizontalFlip** (p=0.5) : introduit une invariance gauche-droite, utile pour de nombreux objets naturels.
-- **RandomRotation** (degrés=15) : rend le modèle moins sensible à l’orientation exacte de l’objet.
-- **ColorJitter** (brightness=0.1, contrast=0.1, saturation=0.1, hue=0.05) : simule des variations d’éclairage et de couleur, améliorant la robustesse aux conditions de prise de vue.
-  Ces choix visent à améliorer la généralisation du modèle en l’exposant à des variations réalistes des images d’entraînement.
+>
+> - **RandomResizedCrop** (scale=(0.8, 1.0), ratio=(0.9, 1.1)) : simule des variations de cadrage et de zoom, rendant le modèle robuste à la position et à la taille de l’objet.
+> - **RandomHorizontalFlip** (p=0.5) : introduit une invariance gauche-droite, utile pour de nombreux objets naturels.
+> - **RandomRotation** (degrés=15) : rend le modèle moins sensible à l’orientation exacte de l’objet.
+> - **ColorJitter** (brightness=0.1, contrast=0.1, saturation=0.1, hue=0.05) : simule des variations d’éclairage et de couleur, améliorant la robustesse aux conditions de prise de vue.
+>   Ces choix visent à améliorer la généralisation du modèle en l’exposant à des variations réalistes des images d’entraînement.
 
 **D9.** Les augmentations **conservent-elles les labels** ? Justifiez pour chaque transformation retenue.
 
 > Oui, toutes les augmentations appliquées sont label-preserving :
-
-- **RandomResizedCrop** : ne modifie pas la classe de l’objet, seulement son cadrage et sa taille apparente.
-- **RandomHorizontalFlip** : l’objet reste de la même classe après un flip horizontal.
-- **RandomRotation** : une rotation modérée ne change pas la nature de l’objet.
-- **ColorJitter** : les variations de couleur et de luminosité n’affectent pas la classe sémantique.
-  Ces transformations sont donc sûres pour l’apprentissage supervisé car elles ne créent pas d’ambiguïté sur le label.
+>
+> - **RandomResizedCrop** : ne modifie pas la classe de l’objet, seulement son cadrage et sa taille apparente.
+> - **RandomHorizontalFlip** : l’objet reste de la même classe après un flip horizontal.
+> - **RandomRotation** : une rotation modérée ne change pas la nature de l’objet.
+> - **ColorJitter** : les variations de couleur et de luminosité n’affectent pas la classe sémantique.
+>   Ces transformations sont donc sûres pour l’apprentissage supervisé car elles ne créent pas d’ambiguïté sur le label.
 
 ### 1.5 Sanity-checks
 
@@ -197,7 +197,7 @@ Expliquez le rôle des **2 hyperparamètres spécifiques au modèle** (ceux impo
 - **Optimisation** : LR = `0.01`, weight decay = `0.0` (0 ou très faible recommandé)
 - **Nombre d'époques** : `50`
 
-![Overfit train/loss](/artifacts/overfit_train-loss.png)
+![Overfit train/loss](/artifacts/overfit/overfit_train-loss.png)
 
 **M3.** Donnez la **taille du sous-ensemble**, les **hyperparamètres** du modèle utilisés, et la **courbe train/loss** (capture). Expliquez ce qui prouve l'overfit.
 
@@ -362,9 +362,9 @@ L'architecture [2,2,2] + [1,2,2] (moins de paramètres) converge plus rapidement
 - **Limites connues** (données, compute, modèle) :
 
 > Le modèle présente un sous-apprentissage marqué, principalement dû à plusieurs facteurs :
-
-- **Compute** : Ressources limitées, entraînement restreint à 20 époques, ce qui empêche d’explorer des architectures plus profondes ou des entraînements prolongés.
-- **Modèle** : Architecture CNN standard, sans mécanismes récents (attention, skip connections), plafonnant à environ 46 % d’accuracy sur 200 classes.
+>
+> - **Compute** : Ressources limitées, entraînement restreint à 20 époques, ce qui empêche d’explorer des architectures plus profondes ou des entraînements prolongés.
+> - **Modèle** : Architecture CNN standard, sans mécanismes récents (attention, skip connections), plafonnant à environ 46 % d’accuracy sur 200 classes.
 
 - **Erreurs rencontrées** (shape mismatch, divergence, NaN…) et **solutions** :
 
