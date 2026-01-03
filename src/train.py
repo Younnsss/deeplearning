@@ -71,13 +71,27 @@ def create_overfit_dataloader(original_loader, num_samples=32):
     )
 
 
+def save_checkpoint(model, optimizer, epoch, val_loss, filepath):
+    """Save model checkpoint."""
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    checkpoint = {
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'val_loss': val_loss,
+    }
+    torch.save(checkpoint, filepath)
+    print(f"Checkpoint saved: {filepath}")
+
+
 def run_training(model, train_loader, val_loader, optimizer, criterion, 
-                max_epochs, device, writer, overfit_small=False):
+                max_epochs, device, writer, artifacts_dir, overfit_small=False):
     """
     Generic training function with all parameters specified.
     """
     model.to(device)
     best_val_loss = float('inf')
+    best_checkpoint_path = os.path.join(artifacts_dir, 'best.ckpt')
     
     for epoch in range(max_epochs):
         print(f"Epoch {epoch+1}/{max_epochs}")
@@ -108,6 +122,14 @@ def run_training(model, train_loader, val_loader, optimizer, criterion,
                 global_step = epoch * len(train_loader) + batch_idx
                 writer.add_scalar('train/loss', loss.item(), global_step)
         
+        # Calculate epoch training metrics
+        avg_train_loss = train_loss / len(train_loader)
+        train_acc = 100. * train_correct / train_total
+        
+        # Log training metrics with exact tag names
+        writer.add_scalar('train/loss', avg_train_loss, epoch)
+        writer.add_scalar('train/accuracy', train_acc, epoch)
+        
         # Validation phase (skip if overfitting on small set)
         if not overfit_small:
             model.eval()
@@ -129,19 +151,18 @@ def run_training(model, train_loader, val_loader, optimizer, criterion,
             avg_val_loss = val_loss / len(val_loader)
             val_acc = 100. * val_correct / val_total
             
-            # Log validation metrics
+            # Log validation metrics with exact tag names
             writer.add_scalar('val/loss', avg_val_loss, epoch)
             writer.add_scalar('val/accuracy', val_acc, epoch)
+            
+            # Save best checkpoint based on validation loss
+            if avg_val_loss < best_val_loss:
+                best_val_loss = avg_val_loss
+                save_checkpoint(model, optimizer, epoch, avg_val_loss, best_checkpoint_path)
+                print(f"New best validation loss: {avg_val_loss:.4f}")
         else:
             avg_val_loss = 0.0
             val_acc = 0.0
-
-        # Calculate epoch metrics
-        avg_train_loss = train_loss / len(train_loader)
-        train_acc = 100. * train_correct / train_total
-        # Log training metrics per epoch
-        writer.add_scalar('train/loss_epoch', avg_train_loss, epoch)
-        writer.add_scalar('train/accuracy', train_acc, epoch)
         
         # Print progress
         if overfit_small:
@@ -182,7 +203,7 @@ def main():
     else:
         # Use config parameters
         learning_rate = train_config['optimizer'].get('lr', 0.001)
-        weight_decay = train_config['optimizer'].get('weight_decay', 1e-4)
+        weight_decay = train_config['optimizer'].get('weight_decay', 0.0001)
         max_epochs = args.max_epochs if args.max_epochs else train_config.get('epochs', 10)
         run_name = train_config.get('run_name', 'experiment')
     
@@ -212,12 +233,17 @@ def main():
     runs_dir = config.get('paths', {}).get('runs_dir', 'runs')
     artifacts_dir = config.get('paths', {}).get('artifacts_dir', 'artifacts')
     
+    # Create artifacts directory
+    os.makedirs(artifacts_dir, exist_ok=True)
+    
     # Setup TensorBoard writer
     log_dir = os.path.join(runs_dir, run_name)
     writer = SummaryWriter(log_dir)
     
     print(f"Logging to: {log_dir}")
+    print(f"Artifacts will be saved to: {artifacts_dir}")
     print(f"Training parameters: lr={learning_rate}, weight_decay={weight_decay}, max_epochs={max_epochs}")
+    print(f"Setup : Seed={seed}, Overfit_small={args.overfit_small}, run_name={run_name}, runs_dir={runs_dir}, artifacts_dir={artifacts_dir}")
     
     # Run training
     run_training(
@@ -229,6 +255,7 @@ def main():
         max_epochs=max_epochs,
         device=device,
         writer=writer,
+        artifacts_dir=artifacts_dir,
         overfit_small=args.overfit_small
     )
     
@@ -238,3 +265,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

@@ -42,8 +42,8 @@ model:
   input_shape: [3, 64, 64] # 3 channels, 64x64 images
 
   # Model-specific parameters
-  blocks_per_stage: [2, 2, 2] # (B1, B2, B3) - can be [2,2,2] or [3,3,3]
-  dilations: [1, 2, 2] # (D1, D2, D3) - D1 always 1, (D2,D3) can be (2,2) or (2,3)
+  blocks_per_stage: [3, 3, 3] # (B1, B2, B3) - selected configuration
+  dilations: [1, 2, 3] # (D1, D2, D3) - D1 always 1, selected (D2,D3) = (2,3)
   channels: [64, 128, 256] # Channels per stage
 
   # Standard parameters (keeping existing structure)
@@ -65,14 +65,14 @@ train:
   seed: 42
   device: auto # "cpu", "cuda", ou "auto"
   batch_size: 64
-  epochs: 10
+  epochs: 15 # Set to middle of 10-20 range
   max_steps: null # entier ou null
   overfit_small: false # true pour sur-apprendre sur un petit échantillon
 
   optimizer:
     name: adam # sgd/adam/rmsprop
-    lr: 0.001
-    weight_decay: 0.0
+    lr: 0.0003 # Selected LR configuration
+    weight_decay: 0.00001 # Selected weight decay configuration
     momentum: 0.9 # utile si SGD
 
   scheduler:
@@ -87,8 +87,8 @@ metrics:
   regression: [] # ex: ["mae", "rmse"]
 
 hparams: # espace pour mini grid search
-  lr: [2.5e-4, 5e-4, 1e-3] # Mini-grille ×0.5 ×1 ×2
-  weight_decay: [1e-5, 1e-4] # Weight decay demandé
+  lr: [0.00025, 0.0005, 0.001] # Mini-grille ×0.5 ×1 ×2
+  weight_decay: [0.00001, 0.0001] # Weight decay demandé
   blocks_per_stage: [[2, 2, 2], [3, 3, 3]] # (B1,B2,B3)
   dilations: [[2, 2], [2, 3]] # (D2,D3) - D1 always 1
 
