@@ -57,7 +57,7 @@
 
 ![Distribution des classes](/artifacts/distributionsClasses.png)
 
-> La distribution des classes est parfaitement équilibrée : chaque classe contient exactement 450 images en entraînement, 50 en validation et 50 en test. Cela garantit que le modèle ne sera pas biaisé vers une classe majoritaire et que les métriques d'entraînement et de validation reflèteront fidèlement la performance réelle. L'absence de déséquilibre facilite l'apprentissage et la comparaison des résultats entre classes.
+> La distribution des classes est parfaitement équilibrée : chaque classe contient exactement 450 images en entraînement, 50 en validation et 50 en test. Cela garantit que le modèle ne sera pas biaisé vers une classe majoritaire et que les métriques d'entraînement et de validation reflèteront fidèment la performance réelle. L'absence de déséquilibre facilite l'apprentissage et la comparaison des résultats entre classes.
 
 **D5.** Mentionnez toute particularité détectée (tailles variées, longueurs variables, multi-labels, etc.).
 
@@ -234,21 +234,51 @@ Le choix du **LR = 5e-4** se situe dans la fenêtre stable (4e-4 à 1e-3) où la
 
 - **Grilles** :
 
-  - LR : `{_____ , _____ , _____}`
+  - LR : `{2.5e-4, 5e-4, 1e-3}` (mini-grille ×0.5 ×1 ×2)
   - Weight decay : `{1e-5, 1e-4}`
-  - Hyperparamètre modèle A : `{_____, _____}`
-  - Hyperparamètre modèle B : `{_____, _____}`
+  - Hyperparamètre modèle A (blocks_per_stage) : `{[2,2,2], [3,3,3]}`
+  - Hyperparamètre modèle B (dilations D2,D3) : `{[2,2], [2,3]}`
 
-- **Durée des runs** : `_____` époques par run (1–5 selon dataset), même seed
+- **Durée des runs** : `3` époques par run, même seed (42)
 
-| Run (nom explicite) | LR  | WD  | Hyp-A | Hyp-B | Val metric (nom=**\_**) | Val loss | Notes |
-| ------------------- | --- | --- | ----- | ----- | ----------------------- | -------- | ----- |
-|                     |     |     |       |       |                         |          |       |
-|                     |     |     |       |       |                         |          |       |
+| Run (nom explicite)                           | LR     | WD   | Hyp-A   | Hyp-B | Val metric (nom=**accuracy**) | Val loss | Notes        |
+| --------------------------------------------- | ------ | ---- | ------- | ----- | ----------------------------- | -------- | ------------ |
+| proj11_lr=3e-04_wd=1e-05_blocks=3-3-3_dil=2-3 | 2.5e-4 | 1e-5 | [3,3,3] | [2,3] | 25.31%                        | 3.197    | **Meilleur** |
+| proj11_lr=1e-03_wd=1e-04_blocks=2-2-2_dil=2-3 | 1e-3   | 1e-4 | [2,2,2] | [2,3] | 25.08%                        | 3.288    | 2ème         |
+| proj11_lr=3e-04_wd=1e-05_blocks=2-2-2_dil=2-2 | 2.5e-4 | 1e-5 | [2,2,2] | [2,2] | 24.65%                        | 3.257    | 3ème         |
+| proj11_lr=5e-04_wd=1e-05_blocks=2-2-2_dil=2-2 | 5e-4   | 1e-5 | [2,2,2] | [2,2] | 24.40%                        | 3.294    |              |
+| proj11_lr=1e-03_wd=1e-05_blocks=2-2-2_dil=2-3 | 1e-3   | 1e-5 | [2,2,2] | [2,3] | 24.20%                        | 3.308    |              |
+| proj11_lr=3e-04_wd=1e-04_blocks=2-2-2_dil=2-3 | 2.5e-4 | 1e-4 | [2,2,2] | [2,3] | 23.86%                        | 3.335    |              |
+| proj11_lr=1e-03_wd=1e-04_blocks=2-2-2_dil=2-2 | 1e-3   | 1e-4 | [2,2,2] | [2,2] | 22.83%                        | 3.406    |              |
+| proj11_lr=1e-03_wd=1e-04_blocks=2-2-2_dil=2-2 | 1e-3   | 1e-4 | [2,2,2] | [2,2] | 22.73%                        | 3.421    |              |
+| proj11_lr=3e-04_wd=1e-04_blocks=3-3-3_dil=2-3 | 2.5e-4 | 1e-4 | [3,3,3] | [2,3] | 22.95%                        | 3.377    |              |
+| proj11_lr=5e-04_wd=1e-05_blocks=2-2-2_dil=2-3 | 5e-4   | 1e-5 | [2,2,2] | [2,3] | 22.52%                        | 3.405    |              |
+| proj11_lr=5e-04_wd=1e-04_blocks=2-2-2_dil=2-2 | 5e-4   | 1e-4 | [2,2,2] | [2,2] | 22.45%                        | 3.442    |              |
+| proj11_lr=5e-04_wd=1e-04_blocks=3-3-3_dil=2-3 | 5e-4   | 1e-4 | [3,3,3] | [2,3] | 22.61%                        | 3.380    |              |
+| proj11_lr=3e-04_wd=1e-04_blocks=3-3-3_dil=2-2 | 2.5e-4 | 1e-4 | [3,3,3] | [2,2] | 22.11%                        | 3.357    |              |
+| proj11_lr=3e-04_wd=1e-05_blocks=2-2-2_dil=2-3 | 2.5e-4 | 1e-5 | [2,2,2] | [2,3] | 22.71%                        | 3.403    |              |
+| proj11_lr=3e-04_wd=1e-04_blocks=2-2-2_dil=2-2 | 2.5e-4 | 1e-4 | [2,2,2] | [2,2] | 21.71%                        | 3.485    |              |
+| proj11_lr=1e-03_wd=1e-05_blocks=3-3-3_dil=2-3 | 1e-3   | 1e-5 | [3,3,3] | [2,3] | 21.58%                        | 3.431    |              |
+| proj11_lr=5e-04_wd=1e-04_blocks=2-2-2_dil=2-3 | 5e-4   | 1e-4 | [2,2,2] | [2,3] | 21.44%                        | 3.519    |              |
+| proj11_lr=5e-04_wd=1e-05_blocks=3-3-3_dil=2-2 | 5e-4   | 1e-5 | [3,3,3] | [2,2] | 21.25%                        | 3.414    |              |
+| proj11_lr=5e-04_wd=1e-05_blocks=3-3-3_dil=2-3 | 5e-4   | 1e-5 | [3,3,3] | [2,3] | 21.01%                        | 3.469    |              |
+| proj11_lr=3e-04_wd=1e-05_blocks=3-3-3_dil=2-2 | 2.5e-4 | 1e-5 | [3,3,3] | [2,2] | 20.46%                        | 3.491    |              |
+| proj11_lr=1e-03_wd=1e-04_blocks=3-3-3_dil=2-2 | 1e-3   | 1e-4 | [3,3,3] | [2,2] | 20.55%                        | 3.491    |              |
+| proj11_lr=1e-03_wd=1e-05_blocks=3-3-3_dil=2-2 | 1e-3   | 1e-5 | [3,3,3] | [2,2] | 20.37%                        | 3.529    |              |
+| proj11_lr=1e-03_wd=1e-04_blocks=3-3-3_dil=2-3 | 1e-3   | 1e-4 | [3,3,3] | [2,3] | 19.57%                        | 3.593    |              |
+| proj11_lr=5e-04_wd=1e-04_blocks=3-3-3_dil=2-2 | 5e-4   | 1e-4 | [3,3,3] | [2,2] | 17.67%                        | 3.714    |              |
 
-> _Insérer capture TensorBoard (onglet HParams/Scalars) ou tableau récapitulatif._
+![Grid Search](/artifacts/gridSearch.png)
 
-**M5.** Présentez la **meilleure combinaison** (selon validation) et commentez l’effet des **2 hyperparamètres de modèle** sur les courbes (stabilité, vitesse, overfit).
+**M5.** Présentez la **meilleure combinaison** (selon validation) et commentez l'effet des **2 hyperparamètres de modèle** sur les courbes (stabilité, vitesse, overfit).
+
+La **meilleure combinaison** est : LR=3e-04, Weight Decay=1e-5, Blocks=[3,3,3], Dilations=[2,3] avec 25.31% de précision validation.
+
+**Effet des hyperparamètres modèle :**
+
+1. **Nombre de blocs (2,2,2) vs (3,3,3)** : Les configurations [3,3,3] montrent une convergence plus lente initialement (accuracy plus faible en époque 1) mais peuvent atteindre de meilleures performances finales quand bien optimisées. Cependant, elles sont plus sensibles aux hyperparamètres d'optimisation et peuvent sous-performer avec de mauvais réglages.
+
+2. **Dilations (D2,D3) [2,2] vs [2,3]** : Les dilations [2,3] semblent légèrement favorables, apparaissant dans 4 des 5 meilleures configurations. L'augmentation de la dilation D3 permet de capturer des dépendances spatiales plus larges dans les dernières couches, ce qui améliore la capacité de représentation sans coût computationnel supplémentaire significatif.
 
 ---
 
