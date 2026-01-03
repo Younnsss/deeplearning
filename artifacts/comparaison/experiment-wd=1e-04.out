@@ -1,0 +1,70 @@
+Host: arcadia-slurm-node-1
+Date: Sat Jan  3 03:36:30 PM UTC 2026
+CUDA visible devices: MIG-c569eb64-bf7b-5bba-8733-30d7c4e2024b
+Loading config from configs/config.yaml
+🌱 Seed initialisé: 42
+Using device: cuda
+Loading data...
+Building model...
+Model built
+Logging to: ./runs/experiment-wd=1e-04
+Artifacts will be saved to: ./artifacts
+Training parameters: lr=0.0003, weight_decay=0.0001, max_epochs=15
+Setup : Seed=42, Overfit_small=False, run_name=experiment-wd=1e-04, runs_dir=./runs, artifacts_dir=./artifacts
+Epoch 1/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 4.0124
+Epoch 1/15: Train Loss: 4.5583, Train Acc: 6.37%, Val Loss: 4.0124, Val Acc: 11.64%
+Epoch 2/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 3.6589
+Epoch 2/15: Train Loss: 3.8735, Train Acc: 14.70%, Val Loss: 3.6589, Val Acc: 17.40%
+Epoch 3/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 3.4122
+Epoch 3/15: Train Loss: 3.4940, Train Acc: 20.62%, Val Loss: 3.4122, Val Acc: 21.16%
+Epoch 4/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 3.2996
+Epoch 4/15: Train Loss: 3.2299, Train Acc: 25.44%, Val Loss: 3.2996, Val Acc: 24.58%
+Epoch 5/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 3.1658
+Epoch 5/15: Train Loss: 3.0227, Train Acc: 29.43%, Val Loss: 3.1658, Val Acc: 27.71%
+Epoch 6/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.8450
+Epoch 6/15: Train Loss: 2.8541, Train Acc: 32.54%, Val Loss: 2.8450, Val Acc: 32.70%
+Epoch 7/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.8080
+Epoch 7/15: Train Loss: 2.7156, Train Acc: 35.53%, Val Loss: 2.8080, Val Acc: 34.24%
+Epoch 8/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.6289
+Epoch 8/15: Train Loss: 2.5993, Train Acc: 37.91%, Val Loss: 2.6289, Val Acc: 37.40%
+Epoch 9/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.5919
+Epoch 9/15: Train Loss: 2.4961, Train Acc: 39.96%, Val Loss: 2.5919, Val Acc: 38.57%
+Epoch 10/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.4409
+Epoch 10/15: Train Loss: 2.4000, Train Acc: 41.92%, Val Loss: 2.4409, Val Acc: 41.37%
+Epoch 11/15
+Epoch 11/15: Train Loss: 2.3164, Train Acc: 43.65%, Val Loss: 2.4607, Val Acc: 40.70%
+Epoch 12/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.3748
+Epoch 12/15: Train Loss: 2.2373, Train Acc: 45.21%, Val Loss: 2.3748, Val Acc: 42.59%
+Epoch 13/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.3474
+Epoch 13/15: Train Loss: 2.1773, Train Acc: 46.44%, Val Loss: 2.3474, Val Acc: 43.73%
+Epoch 14/15
+Epoch 14/15: Train Loss: 2.1135, Train Acc: 47.76%, Val Loss: 2.3759, Val Acc: 43.79%
+Epoch 15/15
+Checkpoint saved: ./artifacts/best.ckpt
+New best validation loss: 2.2572
+Epoch 15/15: Train Loss: 2.0483, Train Acc: 49.16%, Val Loss: 2.2572, Val Acc: 45.63%
+Training completed!
