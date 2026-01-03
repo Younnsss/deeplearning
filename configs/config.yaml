@@ -87,9 +87,10 @@ metrics:
   regression: [] # ex: ["mae", "rmse"]
 
 hparams: # espace pour mini grid search
-  lr: [0.0005, 0.001, 0.005]
-  batch_size: [32, 64]
-  weight_decay: [0.0, 0.0005]
+  lr: [2.5e-4, 5e-4, 1e-3] # Mini-grille ×0.5 ×1 ×2
+  weight_decay: [1e-5, 1e-4] # Weight decay demandé
+  blocks_per_stage: [[2, 2, 2], [3, 3, 3]] # (B1,B2,B3)
+  dilations: [[2, 2], [2, 3]] # (D2,D3) - D1 always 1
 
 paths:
   runs_dir: "./runs"

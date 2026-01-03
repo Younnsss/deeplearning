@@ -138,7 +138,7 @@ def main():
     
     start_lr = 1e-6
     end_lr = 1
-    num_iter = 200
+    num_iter = 1000
     
     # Device setup
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

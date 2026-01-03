@@ -217,14 +217,16 @@ Cette expérience confirme que le modèle a la capacité d'apprendre et que l'im
 ## 4) LR finder
 
 - **Méthode** : balayage LR (log-scale), quelques itérations, log `(lr, loss)`
-- **Fenêtre stable retenue** : `_____ → _____`
+- **Fenêtre stable retenue** : `4e-4 → 1e-3`
 - **Choix pour la suite** :
-  - **LR** = `_____`
-  - **Weight decay** = `_____` (valeurs classiques : 1e-5, 1e-4)
+  - **LR** = `5e-4`
+  - **Weight decay** = `1e-4` (valeurs classiques : 1e-5, 1e-4)
 
-> _Insérer capture TensorBoard : courbe LR → loss._
+![LR Finder](/artifacts/lr_finder.png)
 
 **M4.** Justifiez en 2–3 phrases le choix du **LR** et du **weight decay**.
+
+Le choix du **LR = 5e-4** se situe dans la fenêtre stable (4e-4 à 1e-3) où la loss descend de façon constante, avant la zone d'instabilité où elle commence à remonter. Ce LR modéré évite les oscillations tout en garantissant une convergence efficace. Le **weight decay = 1e-4** est un choix standard qui s'équilibre bien avec ce LR : suffisamment fort pour régulariser sans freiner excessivement l'apprentissage sur Tiny ImageNet qui reste un dataset challenging nécessitant une capacité d'apprentissage préservée.
 
 ---
 
